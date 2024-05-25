@@ -114,7 +114,7 @@ const LoginPage = ({ navigation }) => {
                     }}>
 
                     <TextInput
-                        placeholder='ผู้ใช้'
+                        placeholder='อีเมลผู้ใช้'
                         style={styles.textInputStyle}
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => searchFilter(text, setSearch(text))}

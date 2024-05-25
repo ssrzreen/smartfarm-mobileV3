@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Background from '../../Image/background.png';
 import { launchImageLibrary as _launchImageLibrary, launchCamera as _launchCamera } from 'react-native-image-picker';
 import { SelectList } from 'react-native-dropdown-select-list';
-import RegisInput from '../../component/RegisterInput/RegisInput';
+import TextFiledInput from '../../component/TextFiledInput/TextFiledInput';
 import ConfirmBtn from '../../component/Btn/ConfirmBtn';
 import CancelBtn from '../../component/Btn/CancelBtn';
 let launchImageLibrary = _launchImageLibrary;
@@ -15,13 +15,10 @@ const DataTree = ({ navigation, route }) => {
     const [details, setDetails] = useState('');
     const [note, setNote] = useState('');
     const [plant_status, setPlant_status] = useState('');
+    const [height, setHeight] = useState('');
+    const [leaf_color, setLeaf_color] = useState('');
     const [grower_id, setGrower_id] = useState('')
-
     const [selectedImage, setSelectedImage] = useState(null);
-    const [data, setData] = useState('')
-
-    const [upload, setUpload] = useState(false);
-    const [avatar, setAvatar] = useState('');
 
     const seeds = [
         { value: 'ต้นกล้า' },
@@ -43,10 +40,15 @@ const DataTree = ({ navigation, route }) => {
         setGrower_id('')
     }
 
+    const onSuccessAlert = () => {
+        console.log('บันทึกเรียบร้อย')
+        navigation.goBack()
+    }
 
     const openImagePicker = () => {
         const options = {
-            mediaType: 'photo',
+            mediaType: 'file',
+            accept: 'image',
             includeBase64: false,
             maxHeight: 2000,
             maxWidth: 2000,
@@ -57,7 +59,8 @@ const DataTree = ({ navigation, route }) => {
 
     const handleCameraLaunch = () => {
         const options = {
-            mediaType: 'photo',
+            mediaType: 'file',
+            accept: 'image',
             includeBase64: false,
             maxHeight: 2000,
             maxWidth: 2000,
@@ -65,8 +68,6 @@ const DataTree = ({ navigation, route }) => {
 
         launchCamera(options, handleResponse);
     };
-
-
     const handleResponse = (response) => {
         if (response.didCancel) {
             console.log('User cancelled image picker');
@@ -75,48 +76,24 @@ const DataTree = ({ navigation, route }) => {
         } else {
             let imageUri = response.uri || response.assets?.[0]?.uri;
             setSelectedImage(imageUri);
-            setData(imageUri)
-            setUpload(imageUri)
-
         }
     };
-
-    const uploadImage = (image_uri) => {
-        setUpload(true)
-        let base_url = "https://api.ckc.or.th/tree/"
-        let uploadData = new FormData();
-        uploadData.append('Submit', 'ok');
-        uploadData.append('file', {
-            type: 'image/jpg', uri: image_uri
-            , name: 'uploadimagetmp.jpg'
-        })
-        fetch(base_url, {
-            method: 'post',
-            body: uploadData
-        }).then(response => response.json()).then(response => {
-            if (response.status) {
-                setUpload(false)
-                setAvatar(base_url + response.image)
-            } else {
-                setUpload(false)
-                // Alert.alert('Error', response.message)
-            }
-        }).catch(() => {
-            setUpload(false)
-            Alert.alert('Error', 'Error on network.')
-        })
-    }
-
-
     const InsertRecord = () => {
         if (seedling_status.length == 0) {
             Alert.alert("Required field is Missing")
         } else {
-            InsertAPIURL = "https://api.ckc.or.th/tree/";
+            let InsertAPIURL = "https://api.ckc.or.th/tree/";
             headers = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             };
+            // let uploadData = new FormData();
+            // uploadData.append('Submit', 'ok');
+
+            // const result = uploadData.append('file', {
+            //     type: 'image/jpg', uri: selectedImage
+            //     , name: 'uploadimagetmp.jpg'
+            // })
 
             Data = {
                 licence_id: licence_id,
@@ -125,7 +102,9 @@ const DataTree = ({ navigation, route }) => {
                 note: note,
                 plant_status: plant_status,
                 grower_id: grower_id,
-                path_img: upload
+                height: height,
+                leaf_color : leaf_color,
+                path_img: selectedImage
             };
 
             fetch(InsertAPIURL,
@@ -137,12 +116,12 @@ const DataTree = ({ navigation, route }) => {
             )
                 .then((response) => response.json())
                 .then((response) => {
-                    uploadImage(upload)
+                    // uploadImage(selectedImage)
                     Alert.alert(
                         'ยืนยันบันทึกข้อมูลต้นกล้า',
                         licence_id,
                         [
-                            { text: 'ยืนยัน', onPress: () => console.log('บันทึกเรียบร้อย') },
+                            { text: 'ยืนยัน', onPress: () => onSuccessAlert() },
                             { text: 'ยกเลิก', onPress: () => noHandler() }
                         ]
                     );
@@ -154,31 +133,22 @@ const DataTree = ({ navigation, route }) => {
                 })
         }
     }
-
     const cancel = () => {
         setSeedling_status('')
         setDetails('')
         setNote('')
         setPlant_status('')
         setGrower_id('')
-        setUpload(null)
     }
-
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
             <ImageBackground source={Background} resizeMode='cover' style={styles.image}>
 
-                <RegisInput
+                <TextFiledInput
                     placeholder={'licence_id'}
                     value={licence_id}
                     setValue={setLicence_id}
                 />
-
-                {/* <RegisInput
-                    placeholder={'Seed'}
-                    value={category}
-                    setValue={setSeedling_status}
-                /> */}
                 <SelectList
                     value={seedling_status}
                     setSelected={setSeedling_status}
@@ -190,22 +160,17 @@ const DataTree = ({ navigation, route }) => {
                     dropdownStyles={{ backgroundColor: "#FFFFFF" }}
                 />
 
-                <RegisInput
+                <TextFiledInput
                     placeholder={'รายละเอียด'}
                     value={details}
                     setValue={setDetails} />
 
-                <RegisInput
+                <TextFiledInput
                     placeholder={'บันทึกเพิ่มเติม'}
                     value={note}
                     setValue={setNote}
                 />
 
-                {/* <RegisInput
-                    placeholder={'Plant'}
-                    value={plant_status}
-                    setValue={setPlant_status}
-                /> */}
                 <SelectList
                     value={plant_status}
                     setSelected={setPlant_status}
@@ -216,13 +181,22 @@ const DataTree = ({ navigation, route }) => {
                     boxStyles={{ backgroundColor: "#FFFFFF", borderRadius: 5, width: "100%" }}
                     dropdownStyles={{ backgroundColor: "#FFFFFF" }}
                 />
-                <RegisInput
+                <TextFiledInput
+                    placeholder={'ความสูง'}
+                    value={height}
+                    setValue={setHeight}
+                />
+                <TextFiledInput
+                    placeholder={'สีของใบ'}
+                    value={leaf_color}
+                    setValue={setLeaf_color}
+                />
+                <TextFiledInput
                     placeholder={'Grower'}
                     value={grower_id}
                     setValue={setGrower_id}
                 />
-
-
+                
                 <View style={styles.container}>
                     {selectedImage && (
                         <Image
@@ -274,30 +248,7 @@ const DataTree = ({ navigation, route }) => {
 
     )
 }
-
 const styles = StyleSheet.create({
-    ViewStyle: {
-        flex: 1,
-        padding: 20,
-        marginTop: 10,
-    },
-
-    textStyle:
-    {
-        borderBottomWidth: 1,
-        borderBottomColor: 'red',
-        marginBottom: 20,
-    },
-    root: {
-        alignItems: 'center',
-        padding: 20,
-
-    },
-    logo: {
-        width: "70%",
-        maxWidth: 500,
-        height: 100,
-    },
     image: {
         flex: 1,
         justifyContent: 'center',
@@ -308,15 +259,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderRadius: 20,
         top: 5
-    },
-    button: {
-        width: 150,
-        height: 50,
-        backgroundColor: 'green',
-        marginTop: 20,
-        borderRadius: 25,
-        padding: 15,
-        color: '#F9F9CF9'
     },
     bottonImage: {
         backgroundColor: "#D9D9D9",

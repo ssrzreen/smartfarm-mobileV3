@@ -6,16 +6,10 @@ import CallUsBtn from './components/btn/CallUsBtn';
 import Background from '../../Image/BgHome.png'
 import UnKnow from '../../Image/unknow.png'
 
-
 const HomePage = ({ navigation, route }) => {
-    const [filterData, setfilterData] = useState([]);
-    const [masterData, setmasterData] = useState([]);
-    const [list, setList] = useState([])
-    const [search, setSearch] = useState();
     return (
-        <SafeAreaView style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-            <ImageBackground source={Background} resizeMode='cover' style={styles.imageBg}>
-                <View style={styles.container}>
+        <ImageBackground source={Background} style={styles.imageBg}>
+            <SafeAreaView style={styles.container}>
                     <Image style={styles.image} source={UnKnow} />
                     <View style={styles.containerText}>
                         <View style={{ flexDirection: 'row' }}>
@@ -51,9 +45,12 @@ const HomePage = ({ navigation, route }) => {
                     </View>
                     <View
                         style={{
-                            top: 30,
-                            marginVertical: 320,
-                            marginHorizontal: -160
+                            flex: 1,
+                            position: 'relative',
+                            top: "9%",
+                            marginVertical: "80%",
+                            marginHorizontal: "-40%",
+                            // width:"10%"
                         }}
                     >
                         <ScanBtn
@@ -61,26 +58,28 @@ const HomePage = ({ navigation, route }) => {
                                 navigation.navigate('Scanner')
                             }} />
                     </View>
-
                     <View
                         style={{
-                            top: 25,
-                            marginVertical: 320,
-                            marginHorizontal: 180
+                            flex: 1,
+                            position: 'relative',
+                            top: "8%",
+                            marginVertical: "80%",
+                            marginHorizontal: "30%",
+                            // width:"50%"
+
                         }}>
                         <MailBtn />
                         <CallUsBtn />
                     </View>
-                </View>
-            </ImageBackground >
-        </SafeAreaView>
+            </SafeAreaView>
+        </ImageBackground >
     )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        top: 200,
+        top: "50%",
         flexDirection: 'row',
         display: 'flex',
     },
@@ -142,6 +141,8 @@ const styles = StyleSheet.create({
     imageBg: {
         flex: 1,
         justifyContent: 'center',
+        // position: 'absolute',
+        height: '100%'
     },
 })
 

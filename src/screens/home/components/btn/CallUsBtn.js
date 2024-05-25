@@ -8,14 +8,14 @@ const CallUsBtn = () => {
             onPress={() => console.log("this is call")}
             style={{
                 flex: 1,
-                backgroundColor: "#008807",
+                // backgroundColor: "#008807",
                 // alignItems: 'center',
                 justifyContent: 'center',
-                opacity: 0,
+                opacity: 0.5,
                 // flexDirection: 'row',
-                height: 50,
+                // height: 50,
                 width: 210,
-                marginLeft : -25,
+                marginLeft : -35,
                 // marginHorizontal: 10,
                 borderRadius: 20
             }}>

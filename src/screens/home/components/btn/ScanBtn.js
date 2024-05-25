@@ -8,12 +8,12 @@ const ScanBtn = ({ Press }) => {
             onPress={Press}
             style={{
                 flex: 1,
-                backgroundColor: "#008807",
+                // backgroundColor: "#008807",
                 alignItems: 'center',
                 justifyContent: 'center',
-                opacity: 0,
+                opacity: 0.5,
                 // flexDirection: 'row',
-                height: 150,
+                // height: 150,
                 width: 135,
                 marginLeft: -150,
                 // marginHorizontal: 10,

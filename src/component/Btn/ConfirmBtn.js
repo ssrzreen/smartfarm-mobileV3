@@ -12,7 +12,7 @@ const ConfirmBtn = ({ Press ,bgColor, btnLabel, textColor }) => {
                 justifyContent: 'center',
                 flexDirection: 'row',
                 height: 50,
-                width: 150,
+                width: 100,
                 marginRight: 10,
                 borderRadius: 100
             }}>
