@@ -13,8 +13,6 @@ const Scanner = ({ navigation }) => {
         getListTracking();
     }, [])
 
-   
-
     const getListTracking = () => {
         {
             fetch("https://api.ckc.or.th/tracking/", {
@@ -61,7 +59,7 @@ const Scanner = ({ navigation }) => {
                     navigation.navigate('Tables', {
                         project_code: item.project_code,
                         licence_number: item.licence_number,
-                        tracking_number: item.tracking_number,
+                        strain_id: item.strain_id,
                     })
                     return res == null 
                 } else {

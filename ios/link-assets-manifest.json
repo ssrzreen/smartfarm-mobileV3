@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/THSarabunNew Bold.ttf",
+      "sha1": "79757d1fb8f77160927c2c0a352c1543a8a98a8a"
+    },
+    {
+      "path": "assets/fonts/THSarabunNew BoldItalic.ttf",
+      "sha1": "dd4c1f6ba6b9f26c8f6f7575a8e4a8fb319b1bcd"
+    },
+    {
+      "path": "assets/fonts/THSarabunNew Italic.ttf",
+      "sha1": "17377cd7005c18e7a72de7171bc7d89d45297cd7"
+    },
+    {
+      "path": "assets/fonts/THSarabunNew.ttf",
+      "sha1": "4559382f72ff9e1b6cd6689dd3a3583a41fc48aa"
+    }
+  ]
+}

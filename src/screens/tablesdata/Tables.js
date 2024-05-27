@@ -125,9 +125,9 @@ const Tables = ({ navigation, route }) => {
                     <View style={styles.container}>
                         <Image source={Logo} style={{ height: '30%', width: '100%', position: 'center' }} />
                         <View>
-                            <Text style={{ fontSize: 25 }}>เลขทะเบียน : {route.params.project_code} </Text>
-                            <Text style={{ fontSize: 25 }}>รหัส : {route.params.licence_number} </Text>
-                            <Text style={{ fontSize: 25 }}>เลขแท็ค : {route.params.tracking_number} </Text>
+                            <Text style={styles.textFont}>รหัสโครงการ : {route.params.project_code} </Text>
+                            <Text style={styles.textFont}>ชื่อสายพันธุ์ : {route.params.strain_id} </Text>
+                            <Text style={styles.textFont}>Reg No : {route.params.licence_number} </Text>
                         </View>
                     </View>
                 </View>
@@ -195,6 +195,13 @@ const Tables = ({ navigation, route }) => {
     )
 }
 const styles = StyleSheet.create({
+    textFont :{
+        fontFamily:'THSarabunNew Bold',
+        fontSize: 35,
+        marginHorizontal: 20,
+        top: 10
+
+    },
     buttonContainer: {
         height: 40,
         width: 40,

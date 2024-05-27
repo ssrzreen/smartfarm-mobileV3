@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     loginButton: {
         // flex: 1,
         opacity : 0,
-        backgroundColor: "#05770B",
+        // backgroundColor: "#05770B",
         // alignItems: 'center',
         // justifyContent: 'center',
         flexDirection: 'row',
