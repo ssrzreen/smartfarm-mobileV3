@@ -12,6 +12,7 @@ const LoginPage = ({ navigation }) => {
     const [checkEmail, setCheckEmail] = useState('')
     const [check, setCheck] = useState('')
 
+    
     useEffect(() => {
         getDataMembers();
     }, [])
