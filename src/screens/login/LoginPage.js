@@ -41,8 +41,9 @@ const LoginPage = ({ navigation }) => {
     const searchFilter = (text) => {
         if (text) {
             const newData = masterData.filter((item) => {
-                setCheckEmail(item.email)
-                const itemData = item.email ? item.email : " ";
+                // setCheckEmail(item.email)
+                setCheckEmail(item.enroll_no)
+                const itemData = item.enroll_no ? item.enroll_no : " ";
                 setCheck(checkEmail)
                 const textData = text
                 return itemData.indexOf(textData) > -1
@@ -79,7 +80,7 @@ const LoginPage = ({ navigation }) => {
     const OnSuccess = () => {
         masterData.filter((item) => {
             // const check = e.data
-            const res = item.email
+            const res = item.enroll_no
             console.log(search)
             const checkSearch = search
 
@@ -115,7 +116,7 @@ const LoginPage = ({ navigation }) => {
                     }}>
 
                     <TextInput
-                        placeholder='อีเมลผู้ใช้'
+                        placeholder='เลขทะเบียนผู้ใช้'
                         style={styles.textInputStyle}
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => searchFilter(text, setSearch(text))}
