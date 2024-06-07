@@ -101,7 +101,7 @@ const DataTree = ({ navigation, route }) => {
                 details: details,
                 note: note,
                 plant_status: plant_status,
-                grower_id: grower_id,
+                // grower_id: grower_id,
                 height: height,
                 leaf_color : leaf_color,
                 path_img: selectedImage
@@ -191,11 +191,11 @@ const DataTree = ({ navigation, route }) => {
                     value={leaf_color}
                     setValue={setLeaf_color}
                 />
-                <TextFiledInput
+
+                {/* <TextFiledInput
                     placeholder={'Grower'}
                     value={grower_id}
-                    setValue={setGrower_id}
-                />
+                    setValue={setGrower_id}/> */}
                 
                 <View style={styles.container}>
                     {selectedImage && (

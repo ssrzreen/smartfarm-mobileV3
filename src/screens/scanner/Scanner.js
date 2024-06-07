@@ -39,7 +39,7 @@ const Scanner = ({ navigation }) => {
             })
             setfilterData(newData)
             setSearch(text)
-            console.log('this is search : ' + search)
+            console.log('this is search : ' + search.slice(5,13))
         } else {
             setfilterData(masterData)
             setSearch(text)
@@ -47,12 +47,14 @@ const Scanner = ({ navigation }) => {
     }
 
     const onSuccess = (e) => {
+        
         const check = e.data
+        console.log("this is a check : " + check)
         if (check != null) {
             searchFilter(check)
             masterData.filter((item) => {
                 const res = item.licence_number
-                const checkSearch = search
+                const checkSearch = search.slice(5,13)
                 if (res == checkSearch) {
                     console.log('work')
                     console.log('this is item Tracking :' + item.id)
@@ -61,7 +63,7 @@ const Scanner = ({ navigation }) => {
                         licence_number: item.licence_number,
                         strain_id: item.strain_id,
                     })
-                    return res == null 
+                    // return res == null 
                 } else {
                     // console.log('this logic not work')
                 }
