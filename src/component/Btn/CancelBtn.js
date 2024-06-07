@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const CancelBtn = ({ bgColor, btnLabel, textColor }) => {
+const CancelBtn = ({ Press , bgColor, btnLabel, textColor }) => {
     return (
         <TouchableOpacity
-            onPress={() => console.log("this is Cancel")}
+            onPress={Press}
             style={{
                 flex: 1,
                 backgroundColor: bgColor,

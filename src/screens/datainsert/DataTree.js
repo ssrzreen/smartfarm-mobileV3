@@ -134,11 +134,7 @@ const DataTree = ({ navigation, route }) => {
         }
     }
     const cancel = () => {
-        setSeedling_status('')
-        setDetails('')
-        setNote('')
-        setPlant_status('')
-        setGrower_id('')
+        navigation.goBack()
     }
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
